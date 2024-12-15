@@ -1,0 +1,58 @@
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    ContactNumber VARCHAR(15)
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,
+    Salary DECIMAL(10, 2)
+);
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
+);
+
+
+INSERT INTO Customers (CustomerID, CustomerName, ContactNumber) VALUES (1, 'John Doe', '123-456-7890');
+INSERT INTO Customers (CustomerID, CustomerName, ContactNumber) VALUES (2, 'Jane Smith', '987-654-3210');
+INSERT INTO Customers (CustomerID, CustomerName, ContactNumber) VALUES (3, 'Alice Johnson', '555-666-7777');
+
+
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (1, 'HR');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (2, 'Engineering');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (3, 'Marketing');
+
+
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (1, 'Mark Taylor', 1, 50000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (2, 'Nina Brown', 2, 70000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (3, 'Oliver Green', 2, 80000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (4, 'Sophia Adams', 3, 60000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (5, 'Liam Harris', 1, 55000);
+
+SELECT EmployeeName
+FROM Employees
+WHERE Salary > (
+    SELECT AVG(Salary)
+    FROM Employees
+);
+
+SELECT DepartmentName
+FROM Departments
+WHERE DepartmentID IN (
+    SELECT DepartmentID
+    FROM Employees
+    GROUP BY DepartmentID
+);
+
+SELECT EmployeeName, DepartmentID
+FROM Employees
+WHERE (DepartmentID, Salary) IN (
+    SELECT DepartmentID, MAX(Salary)
+    FROM Employees
+    GROUP BY DepartmentID
+);
+
