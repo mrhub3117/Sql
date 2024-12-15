@@ -1,0 +1,47 @@
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,
+    Salary DECIMAL(10, 2)
+);
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
+);
+
+
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (1, 'HR');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (2, 'Engineering');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (3, 'Marketing');
+
+
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (1, 'Mark Taylor', 1, 50000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (2, 'Nina Brown', 2, 70000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (3, 'Oliver Green', 2, 80000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (4, 'Sophia Adams', 3, 60000);
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary) VALUES (5, 'Liam Harris', 1, 55000);
+
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+FULL JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+CROSS JOIN Departments;
