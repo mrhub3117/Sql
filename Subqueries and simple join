@@ -56,3 +56,9 @@ WHERE (DepartmentID, Salary) IN (
     GROUP BY DepartmentID
 );
 
+
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+
