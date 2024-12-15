@@ -1,0 +1,18 @@
+CREATE DATABASE emp;
+USE emp;
+
+CREATE TABLE empdetail(
+    emp_id INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) UNIQUE,
+    Age INT CHECK(Age>=18)
+);
+
+INSERT INTO empdetail(emp_id,Name,Email,Age)VALUES(1,"Sam","sam22@gmail.com",25);
+
+UPDATE empdetail
+SET Email="sam23@gmail.com"
+WHERE emp_id=1;
+
+DELETE FROM empdetail
+WHERE emp_id=1;
