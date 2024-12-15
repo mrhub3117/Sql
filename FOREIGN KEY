@@ -21,4 +21,13 @@ INSERT INTO Orders (OrderID, OrderDate, CustomerID, Amount) VALUES (2, '2024-12-
 INSERT INTO Orders (OrderID, OrderDate, CustomerID, Amount) VALUES (3, '2024-12-03', 1, 250.00);
 
 
-SELECT OrderID, OrderDate, CustomerID, Amount FROM Orders;
+SELECT 
+    Orders.OrderID, 
+    Orders.OrderDate, 
+    Customers.CustomerName, 
+    Orders.Amount
+FROM 
+    Orders
+INNER JOIN 
+    Customers ON Orders.CustomerID = Customers.CustomerID;
+
