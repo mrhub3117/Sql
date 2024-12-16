@@ -1,0 +1,18 @@
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL
+);
+INSERT INTO Users (Username, Password) VALUES ('user1', 'password1');
+INSERT INTO Users (Username, Password) VALUES ('user2', 'password2');
+
+
+DECLARE @Username NVARCHAR(50);
+DECLARE @Password NVARCHAR(50);
+
+SET @Username = 'username';
+
+SET @Password = 'password1';
+
+
+SELECT * FROM Users WHERE Username = @Username AND Password = @Password;
