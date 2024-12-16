@@ -1,0 +1,20 @@
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,
+    Salary DECIMAL(10, 2)
+);
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
+);
+
+
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (1, 'HR');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (2, 'Engineering');
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES (3, 'Marketing');
+
+CALL AddEmployee('John Doe', 1, 55000.00);
+
+SELECT * FROM Employees;
