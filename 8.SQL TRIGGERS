@@ -1,0 +1,48 @@
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,
+    Salary DECIMAL(10, 2)
+);
+
+CREATE TABLE Logs (
+    LogID INT PRIMARY KEY AUTO_INCREMENT,
+    LogMessage VARCHAR(255),
+    LogDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER AfterInsertEmployee
+AFTER INSERT ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO Logs (LogMessage)
+    VALUES (CONCAT('New employee added: ', NEW.EmployeeName));
+END;
+
+CREATE TRIGGER AfterUpdateEmployee
+AFTER UPDATE ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO Logs (LogMessage)
+    VALUES (CONCAT('Employee salary updated: ', NEW.EmployeeName, ' to ', NEW.Salary));
+END;
+
+CREATE TRIGGER AfterDeleteEmployee
+AFTER DELETE ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO Logs (LogMessage)
+    VALUES (CONCAT('Employee deleted: ', OLD.EmployeeName));
+END;
+
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, Salary)
+VALUES (1, 'John Doe', 1, 55000.00);
+
+UPDATE Employees
+SET Salary = 60000.00
+WHERE EmployeeID = 1;
+
+DELETE FROM Employees
+WHERE EmployeeID = 1;
+
+SELECT * FROM Logs;
